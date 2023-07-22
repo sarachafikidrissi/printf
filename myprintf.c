@@ -64,10 +64,3 @@ int _printf(const char *format, ...)
     va_end(args);
     return (count);
 }
-
-int main(void)
-{
-    char c;
-    c = 'h';
-    _printf("%c", c);
-}
