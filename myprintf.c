@@ -7,7 +7,7 @@
 
 int _printf(const char *format, ...)
 {
-    unsigned int count = 0, i = 0, iptr = 0;
+    unsigned int count = 0, i = 0, ipptr = 0;
     va_list args;
     int (*fptr)(va_list, char *, unsigned int);
     char *ptr;
@@ -20,32 +20,32 @@ int _printf(const char *format, ...)
     if (format[i] == '\0')
         return (0);
 
-    for (i = 0; format != NULL && format[i] != '\0', i++)
+    for (i = 0; format != NULL && format[i] != '\0'; i++)
     {
         if (format[i] == '%')
         {
             if (format[i + 1] == '\0')
             {
-                print_ptr(ptr, iptr);
+                print_ptr(ptr, ipptr);
                 free(ptr);
                 va_end(args);
                 return (-1);
             }
             else
             {
-                ptr = choise_func(format, i + 1);
+                ptr = choose_func(format, i + 1);
                 if (ptr == NULL)
                 {
                     if (format[i + 1] == ' ' && format[i + 2] == '\0')
                         return (-1);
 
-                    handl_ptr(ptr, format[i], iptr);
+                    handl_ptr(ptr, format[i], ipptr);
                     count++;
                     i--;
                 }
                 else
                 {
-                    count += fptr(args, ptr, iptr);
+                    count += fptr(args, ptr, ipptr);
                     i += count_format(format, i + 1);
                 }
             }
@@ -53,13 +53,13 @@ int _printf(const char *format, ...)
         }
         else
         {
-            handl_ptr(ptr, format[i], iptr);
+            handl_ptr(ptr, format[i], ipptr);
             count++;
         }
-        for (iptr = count; iptr > 1024; iptr -=1024)
+        for (ipptr = count; ipptr > 1024; ipptr -=1024)
             ;
     }
-    print_ptr(buffer, iptr);
+    print_ptr(ptr, ipptr);
     free(ptr);
     va_end(args);
     return (count);
