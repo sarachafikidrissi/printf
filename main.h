@@ -4,7 +4,11 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 int _printf(const char *format, ...);
+int print_char(va_list args);
+int _putchar(char c);
+
 
 #endif
