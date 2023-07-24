@@ -1,4 +1,5 @@
 #include "main.h"
+#include <limits.h>
 /**
  * print_nnumber - a function that prints digits
  * @num: an input number
@@ -6,7 +7,7 @@
 */
 int print_number(int num)
 {
-	if (num == -2147483648)
+	if (num == INT_MIN)
 	{
 		_putchar('-');
 		_putchar('2');
@@ -21,7 +22,7 @@ int print_number(int num)
 	if (num >= 10)
 	{
 		print_number(num / 10);
-		print_number(num %10);
+		print_number(num % 10);
 	}
 	else if (num < 10)
 	{
