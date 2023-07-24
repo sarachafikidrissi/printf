@@ -10,11 +10,12 @@ int _printf(const char *format, ...)
 	int count = 0;
 
 	va_list args;
+	
 	va_start(args, format);
 
 	if (!format || !format[0])
 		return (-1);
-	
+
 	while (*format)
 	{
 		if (*format == '%')
@@ -44,6 +45,11 @@ int _printf(const char *format, ...)
 					count++;
 				count += len_number(num);
 				print_number(num);
+			}
+			else if (*format == 'r')
+			{
+				char *str = va_arg(args, char *);
+				count += print_rev(str);
 			}
 			else
 			{

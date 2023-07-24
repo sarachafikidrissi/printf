@@ -11,6 +11,7 @@ int print_number(int num);
 int len_number(int num);
 int print_str(char *str);
 int _putchar(char c);
+int print_rev(char *str);
 
 
 
