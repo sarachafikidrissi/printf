@@ -12,7 +12,7 @@ int print_str(char *str)
     if (str == NULL)
     {
         print_str("(null)");
-        return;
+        return ;
     }
     while (str[i])
     {
