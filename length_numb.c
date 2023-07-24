@@ -7,7 +7,7 @@
 
 int len_number(int num)
 {
-    if (num == 0)
-        return (0);
-    return (1 + len_number(num / 10));
+	if (num == 0)
+		return (0);
+	return (1 + len_number(num / 10));
 }
