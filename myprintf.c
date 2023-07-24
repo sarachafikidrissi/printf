@@ -1,66 +1,50 @@
 #include "main.h"
-/**
- * _printf - function that produces output according to a format
- * @format: input string
- * Return: number of characters printed
-*/
+#include <limits.h>
+#include <stdio.h>
 
+/**
+ * _printf - produces output according to a format
+ * @format: format string containing the characters and the specifiers
+ * Description: this function will call the get_print() function that will
+ * determine which printing function to call depending on the conversion
+ * specifiers contained into fmt
+ * Return: length of the formatted output string
+ */
 int _printf(const char *format, ...)
 {
-    unsigned int count = 0, i = 0, ipptr = 0;
-    va_list args;
-    int (*fptr)(va_list, char *, unsigned int);
-    char *ptr;
+	int (*pfunc)(va_list, flags_t *);
+	const char *p;
+	va_list arguments;
+	flags_t flags = {0, 0, 0};
 
-    va_start(args, format);
-    ptr = malloc(sizeof(char) * 1024);
+	register int count = 0;
 
-    if (format == NULL || ptr == NULL || (format[i] == '%' && format[i + 1] == '\0') )
-        return (-1);
-    if (format[i] == '\0')
-        return (0);
+	va_start(arguments, format);
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	for (p = format; *p; p++)
+	{
+		if (*p == '%')
+		{
+			p++;
+			if (*p == '%')
+			{
+				count += _putchar('%');
+				continue;
+			}
+			while (get_flag(*p, &flags))
+				p++;
+			pfunc = get_print(*p);
+			count += (pfunc)
+				? pfunc(arguments, &flags)
+				: _printf("%%%c", *p);
+		} else
+			count += _putchar(*p);
+	}
+	_putchar(-1);
+	va_end(arguments);
+	return (count);
 
-    for (i = 0; format != NULL && format[i] != '\0'; i++)
-    {
-        if (format[i] == '%')
-        {
-            if (format[i + 1] == '\0')
-            {
-                print_ptr(ptr, ipptr);
-                free(ptr);
-                va_end(args);
-                return (-1);
-            }
-            else
-            {
-                ptr = choose_func(format, i + 1);
-                if (ptr == NULL)
-                {
-                    if (format[i + 1] == ' ' && format[i + 2] == '\0')
-                        return (-1);
-
-                    handl_ptr(ptr, format[i], ipptr);
-                    count++;
-                    i--;
-                }
-                else
-                {
-                    count += fptr(args, ptr, ipptr);
-                    i += count_format(format, i + 1);
-                }
-            }
-            i++;
-        }
-        else
-        {
-            handl_ptr(ptr, format[i], ipptr);
-            count++;
-        }
-        for (ipptr = count; ipptr > 1024; ipptr -=1024)
-            ;
-    }
-    print_ptr(ptr, ipptr);
-    free(ptr);
-    va_end(args);
-    return (count);
 }

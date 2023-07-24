@@ -1,38 +1,76 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <stdarg.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include <stdarg.h>
 
 /**
- * struct print - a struct for printer functions
- * @arg_type: identifier
- * @f: pointer to a printer functions
- * Description: struct that stores pointers to a
- * printer functions
-*/
-
-typedef struct print
+ * struct flags - struct containing flags to "turn on"
+ * when a flag specifier is passed to _printf()
+ * @plus: flag for the '+' character
+ * @space: flag for the ' ' character
+ * @hash: flag for the '#' character
+ */
+typedef struct flags
 {
-    char *arg_type;
-    int (*f)(va_list, char *, unsigned int);
-}print_s;
+	int plus;
+	int space;
+	int hash;
+} flags_t;
 
-/***printf function signature**/
+/**
+ * struct printHandler - struct to choose the right function depending
+ * on the format specifier passed to _printf()
+ * @c: format specifier
+ * @f: pointer to the correct printing function
+ */
+typedef struct printHandler
+{
+	char c;
+	int (*f)(va_list ap, flags_t *f);
+} ph;
+
+/* print_nums */
+int print_int(va_list l, flags_t *f);
+void print_number(int n);
+int print_unsigned(va_list l, flags_t *f);
+int count_digit(int i);
+
+/* print_bases */
+int print_hex(va_list l, flags_t *f);
+int print_hex_big(va_list l, flags_t *f);
+int print_binary(va_list l, flags_t *f);
+int print_octal(va_list l, flags_t *f);
+
+/* converter */
+char *convert(unsigned long int num, int base, int lowercase);
+
+/* _printf */
 int _printf(const char *format, ...);
 
-int print_char(va_list, char *pptr, unsigned int ipptr);
-int print_str(va_list args, char *pptr, unsigned int ipptr);
+/* get_print */
+int (*get_print(char s))(va_list, flags_t *);
 
+/* get_flag */
+int get_flag(char s, flags_t *f);
 
+/* print_alpha */
+int print_string(va_list l, flags_t *f);
+int print_char(va_list l, flags_t *f);
 
-int print_ptr(char *pptr, unsigned int npptr);
-int (*choose_func(const char *s, int index))(va_list, char *, unsigned int);
-unsigned int handl_ptr(char *pptr, char c, unsigned int ipptr);
-int count_format(const char *s, int index)
+/* write_funcs */
+int _putchar(char c);
+int _puts(char *str);
 
+/* print_custom */
+int print_rot13(va_list l, flags_t *f);
+int print_rev(va_list l, flags_t *f);
+int print_bigS(va_list l, flags_t *f);
 
+/* print_address */
+int print_address(va_list l, flags_t *f);
 
+/* print_percent */
+int print_percent(va_list l, flags_t *f);
 
 #endif
