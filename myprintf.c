@@ -1,66 +1,67 @@
 #include "main.h"
 /**
- * _printf - function that produces output according to a format
- * @format: input string
- * Return: number of characters printed
+ * _printf - a function that produces output according to a format.
+ * @format:  a character string.
+ * Return: number of printed characters.
 */
 
 int _printf(const char *format, ...)
 {
-    unsigned int count = 0, i = 0, ipptr = 0;
-    va_list args;
-    int (*fptr)(va_list, char *, unsigned int);
-    char *ptr;
+    int count = 0;
 
+    va_list args,
     va_start(args, format);
-    ptr = malloc(sizeof(char) * 1024);
 
-    if (format == NULL || ptr == NULL || (format[i] == '%' && format[i + 1] == '\0') )
+    if (!format || !format[0])
         return (-1);
-    if (format[i] == '\0')
-        return (0);
-
-    for (i = 0; format != NULL && format[i] != '\0'; i++)
+    
+    while (*format)
     {
-        if (format[i] == '%')
+        if (*format == '%')
         {
-            if (format[i + 1] == '\0')
+            *format++;
+            if (*format == 'c')
             {
-                print_ptr(ptr, ipptr);
-                free(ptr);
-                va_end(args);
-                return (-1);
+                char c = va_arg(args, int);
+                count += _putchar(c);
+
+            }
+            else if (*format == 's')
+            {
+                char *str = va_arg(args, char *);
+                count += print_str(str);
+            }
+            else if (*format == '%')
+            {
+                _putchar('%');
+                count++;
+            }
+            else if (*format == 'd' || *format == 'i')
+            {
+                int num = va_arg(args, int);
+                if (num < 0)
+                    count++;
+                count += len_number(num);
+                print_number(num);
             }
             else
             {
-                ptr = choose_func(format, i + 1);
-                if (ptr == NULL)
+                _putchar('%');
+                count++;
+                if (*format)
                 {
-                    if (format[i + 1] == ' ' && format[i + 2] == '\0')
-                        return (-1);
-
-                    handl_ptr(ptr, format[i], ipptr);
+                    _putchar(*format);
                     count++;
-                    i--;
-                }
-                else
-                {
-                    count += fptr(args, ptr, ipptr);
-                    i += count_format(format, i + 1);
                 }
             }
-            i++;
+            format++;
         }
         else
         {
-            handl_ptr(ptr, format[i], ipptr);
+            _putchar(*format);
+            format++;
             count++;
         }
-        for (ipptr = count; ipptr > 1024; ipptr -=1024)
-            ;
     }
-    print_ptr(ptr, ipptr);
-    free(ptr);
-    va_end(args);
     return (count);
 }

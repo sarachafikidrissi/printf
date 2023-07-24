@@ -1,27 +1,24 @@
 #include "main.h"
 /**
- * print_str - writes the string to stdout
- * @args: input string
- * @pptr: ptr pointer
- * @ipptr: index for ptr pointer
- * Return: 1 is successful
+ * print_str - a function that prints a string
+ * @str: an input string
+ * Return: length of str , (null) if str is NULL
 */
-int print_str(va_list args, char *pptr, unsigned int ipptr)
-{
-    char *str;
-    unsigned int i;
-    char nill[] = "(null)";
 
-    str = va_arg(args, char *);
+int print_str(char *str)
+{
+    int i = 0;
+
     if (str == NULL)
     {
-        for (i = 0; nill[i]; i++)
-            ipptr = handl_ptr(pptr, nill[i], ipptr);
-        return (2);
+        print_str("(null)");
+        return;
     }
-    for (i = 0; str[i]; i++)
+    while (str[i])
     {
-        ipptr = handl_ptr(pptr, str[i], ipptr);
+        _putchar(str[i]);
+        i++;
     }
-    return (i);
+    return(i);
+
 }
