@@ -26,7 +26,7 @@ int print_number(int num)
 	}
 	else if (num < 10)
 	{
-		_putchar(num + '10');
+		_putchar(num + '0');
 	}
 	return (1);
 }
