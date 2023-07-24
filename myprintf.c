@@ -4,7 +4,6 @@
  * @format:  a character string.
  * Return: number of printed characters.
 */
-
 int _printf(const char *format, ...)
 {
 	int count = 0;
@@ -26,7 +25,6 @@ int _printf(const char *format, ...)
 				char c = va_arg(args, int);
 				_putchar(c);
 				count = count + 1;
-
 			}
 			else if (*format == 's')
 			{
