@@ -2,7 +2,7 @@
 
 int print_rev(char *str)
 {
-    int i, count = 0;
+    int i = 0, count = 0;
 
     if (str == NULL)
     {
