@@ -5,15 +5,13 @@ int print_rev(char *str)
     int i = 0, count = 0;
 
     if (str == NULL)
-    {
-        print_rev("(null)");
-        return (1);
-    }
+        str = ")llun(";
     while (str[i])
         i++;
-    
-    while (i)
-        _putchar(str[--i]);
+    for (i -=1; i >= 0; i--)
+    {
+        _putchar(str[i]);
         count++;
+    }
     return (count);
 }
