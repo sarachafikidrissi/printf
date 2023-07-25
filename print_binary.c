@@ -4,9 +4,8 @@ int print_binary(va_list args)
 {
     unsigned int num, i = 0, j;
     int count = 0;
-    num = va_arg(args, unsigned int);
-
     char binary[32];
+    num = va_arg(args, unsigned int);
 
     while (num != 0)
     {
