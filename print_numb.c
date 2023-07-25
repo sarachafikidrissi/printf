@@ -1,37 +1,92 @@
 #include "main.h"
 #include <limits.h>
 
-int print_value(int num);
 /**
- * print_nnumber - a function that prints digits
- * @args: pointer to that number
- * Return: counts of printed numbers
+ * printf_int - prints integer
+ * @args: argument to print
+ * Return: number of characters printed
  */
-int print_number(va_list args) {
+int printf_int(va_list args)
+{
+	int n = va_arg(args, int);
+	int num, last = n % 10, digit, exp = 1;
+	int  i = 1;
 
-	int number = va_arg(args, int);
-	return (print_value(number));
-}
+	n = n / 10;
+	num = n;
 
-int print_value(int num) {
-	int count = 0;
-	if (num == INT_MIN) {
-		_putchar('-');
-		_putchar('2');
-		count += 2;
-		count += print_value(147483648);
-		return (1);
-	} else if (num < 0) {
+	if (last < 0)
+	{
 		_putchar('-');
 		num = -num;
-		count++;
+		n = -n;
+		last = -last;
+		i++;
 	}
-	if (num >= 10) {
-		count += print_value(num / 10);
-		count += print_value(num % 10);
-	} else if (num < 10) {
-		_putchar(num + '0');
-		count++;
+	if (num > 0)
+	{
+		while (num / 10 != 0)
+		{
+			exp = exp * 10;
+			num = num / 10;
+		}
+		num = n;
+		while (exp > 0)
+		{
+			digit = num / exp;
+			_putchar(digit + '0');
+			num = num - (digit * exp);
+			exp = exp / 10;
+			i++;
+		}
 	}
-	return (count);
+	_putchar(last + '0');
+
+	return (i);
+}
+
+/**
+ * printf_dec - prints decimal
+ * @args: argument to print
+ * Return: number of characters printed
+ */
+
+int printf_dec(va_list args)
+{
+	int n = va_arg(args, int);
+	int num, last = n % 10, digit;
+	int  i = 1;
+	int exp = 1;
+
+	n = n / 10;
+	num = n;
+
+	if (last < 0)
+	{
+		_putchar('-');
+		num = -num;
+		n = -n;
+		last = -last;
+		i++;
+	}
+	if (num > 0)
+	{
+		while (num / 10 != 0)
+		{
+			exp = exp * 10;
+			num = num / 10;
+		}
+		num = n;
+		while (exp > 0)
+		{
+			digit = num / exp;
+			_putchar(digit + '0');
+			num = num - (digit * exp);
+			exp = exp / 10;
+			i++;
+		}
+	}
+	_putchar(last + '0');
+
+	return (i);
 }

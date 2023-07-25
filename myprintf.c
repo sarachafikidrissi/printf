@@ -7,8 +7,8 @@
 int _printf(const char *format, ...) {
 	int count = 0, j, found = 0;
 	specifier mt[] = {
-			{"c", print_char}, {"s", print_str}, {"d", print_number},
-			{"i", print_number}, {"%", print_percent}, {"r", print_rev},
+			{"c", print_char}, {"s", print_str}, {"d", print_dec},
+			{"i", print_int}, {"%", print_percent}, {"r", print_rev},
 			{"R", print_root}, {"b", print_binary}, {"S", print_S},
 			{"x", print_x}, {"p", print_address}, {"u", print_u}, {"o", print_o},
 			{"X", print_bigx}, {"%%", printf_37}, {NULL, NULL}};
