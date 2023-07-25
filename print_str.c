@@ -3,21 +3,19 @@
  * print_str - a function that prints a string
  * @str: an input string
  * Return: length of str , (null) if str is NULL
-*/
+ */
 
-int print_str(char *str)
-{
-	int i = 0;
+int print_str(va_list args) {
+  int count = 0;
+  const char *str = va_arg(args, const char *);
 
-	if (str == NULL)
-	{
-		print_str("(null)");
-		return (1);
-	}
-	while (str[i])
-	{
-		_putchar(str[i]);
-		i++;
-	}
-	return (i);
+  if (!str)
+    str = "(null)";
+
+  while (*str) {
+    _putchar(*str);
+    str++;
+    count++;
+  }
+  return (count);
 }

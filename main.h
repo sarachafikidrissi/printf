@@ -2,18 +2,27 @@
 #define MAIN_H
 
 #include <stdarg.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <stdio.h>
 
+typedef struct specifier {
+  const char *s;
+  int (*f)(va_list);
+} specifier;
+
+/* printf function */
 int _printf(const char *format, ...);
-int print_number(int num);
+
+/* functions */
+int print_char(va_list args);
+int print_str(va_list args);
+int print_number(va_list args);
+int print_percent(va_list args);
+int print_rev(va_list args);
+
+/* helpers */
 int len_number(int num);
-int print_str(char *str);
 int _putchar(char c);
-int print_rev(char *str);
-
-
-
 
 #endif
