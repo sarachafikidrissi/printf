@@ -21,9 +21,11 @@ int print_number(va_list args);
 int print_percent(va_list args);
 int print_rev(va_list args);
 int print_root(va_list args);
+int print_binary(va_list args);
 
 /* helpers */
 int len_number(int num);
 int _putchar(char c);
+void rev_string(char *s);
 
 #endif
