@@ -26,6 +26,5 @@ int print_binary(va_list args);
 /* helpers */
 int len_number(int num);
 int _putchar(char c);
-void rev_string(char *s);
 
 #endif

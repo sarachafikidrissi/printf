@@ -2,35 +2,26 @@
 
 int print_binary(va_list args)
 {
-    unsigned int num, i = 0, j;
-    int count = 0;
-    num = va_arg(args, unsigned int);
+	unsigned int decimal, m = 2147483648, j, limit = 0;
+	unsigned int array[32];
+	int count = 0;
 
-    char binary[32];
+	decimal = va_arg(args, unsigned int);
+	array[0] = decimal / m;
 
-    while (num != 0)
-    {
-        if (num % 2 == 0)
-        {
-            binary[i] = 0;
-            count++;
-        }
-        else
-        {
-            binary[i] = 1;
-            count++;
-        }
-
-        num /= 2;
-        i++;
-    }
-    binary[i] = '\0';
-
-    rev_string(binary);
-    for (j = 0; binary[j]; i++)
-    {
-        _putchar(binary[j]);
-        j++;
-    }
-    return (j);
+	for (j = 1; j < 32; j++)
+	{
+		m /= 2;
+		a[j] = (decimal / m) % 2;
+	}
+	for (j = 0; j < 32; j++)
+	{
+		limit += array[j];
+		if (limit || j == 31)
+		{
+			_putchar(a[j] + '0');
+			count++;
+		}
+	}
+	return (count);
 }
