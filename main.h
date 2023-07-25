@@ -24,9 +24,14 @@ int print_root(va_list args);
 int print_binary(va_list args);
 int print_S(va_list args);
 int print_x(va_list args);
+int print_address(va_list args);
+int _puts(char *str);
+int print_u(va_list args);
+int print_o(va_list args);
 
 /* helpers */
 int len_number(int num);
 int _putchar(char c);
+char *convert(unsigned long int num, int base, int lowercase);
 
 #endif
