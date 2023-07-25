@@ -10,7 +10,8 @@ int _printf(const char *format, ...) {
   int found = 0;
   specifier mt[] = {{"c", print_char},    {"s", print_str},
                     {"d", print_number},  {"i", print_number},
-                    {"%", print_percent}, {NULL, NULL}};
+                    {"%", print_percent}, {"r", print_rev},
+                    {NULL, NULL}};
 
   va_list args;
 

@@ -10,7 +10,7 @@ int print_str(va_list args) {
   const char *str = va_arg(args, const char *);
 
   if (!str)
-    str = "(null)";
+    str = ")null(";
 
   while (*str) {
     _putchar(*str);
