@@ -4,49 +4,25 @@
  * printable character ascii value
  * @args: string to print
  * Return : number of printed characters
-*/
-int print_S(va_list args)
-{
-	unsigned int i = 0;
-	int count = 0;
-	char *str = va_arg(args, char *);
+ */
+int print_S(va_list args) {
+  int i, count = 0;
+  char *res;
+  char *s = va_arg(args, char *);
 
-	if (str == NULL)
-		str = "(null)";
-	for (i = 0; str[i]; i++)
-	{
-		if (str[i] < 32 || str[i] >= 127)
-		{
-			if (str[i] == '\n')
-			{
-				_putchar('\\');
-				_putchar('x');
-				_putchar('0');
-				_putchar('A');
-				count += 4;
-			}
-			else if (str[i] == '\t')
-			{
-				_putchar('\\');
-				_putchar('x');
-				_putchar('0');
-				_putchar('9');
-				count += 4;
+  if (!s)
+    return (_puts("(null)"));
 
-			}
-			else
-			{
-				_putchar('\\');
-				_putchar('x');
-				count += 2;
-				count += print_x(args);
-			}
-		}
-		else
-		{
-			_putchar(str[i]);
-			count++;
-		}
-	}
-	return (count);
+  for (i = 0; s[i]; i++) {
+    if (s[i] > 0 && (s[i] < 32 || s[i] >= 127)) {
+      _puts("\\x");
+      count += 2;
+      res = convert(s[i], 16, 0);
+      if (!res[1])
+        count += _putchar('0');
+      count += _puts(res);
+    } else
+      count += _putchar(s[i]);
+  }
+  return (count);
 }
