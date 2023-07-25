@@ -1,4 +1,10 @@
 #include "main.h"
+/**
+ * print_binary - a function that handles 'b' in order
+ * to convert a decimal to binary
+ * @args: a pointer to that decimal number
+ * Return: number of printed numbers
+*/
 
 int print_binary(va_list args)
 {

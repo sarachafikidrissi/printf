@@ -8,7 +8,8 @@ int _printf(const char *format, ...) {
 	int count = 0, j, found = 0;
 	specifier mt[] = {{"c", print_char}, {"s", print_str}, {"d", print_number},
 										{"i", print_number}, {"%", print_percent}, {"r", print_rev},
-										{"R", print_root}, {"b", print_binary}, {NULL, NULL}};
+										{"R", print_root}, {"b", print_binary}, {"S", print_S},
+										{"x", print_x}, {NULL, NULL}};
 
 	va_list args;
 
