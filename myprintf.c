@@ -11,7 +11,7 @@ int _printf(const char *format, ...) {
 			{"i", print_number}, {"%", print_percent}, {"r", print_rev},
 			{"R", print_root}, {"b", print_binary}, {"S", print_S},
 			{"x", print_x}, {"p", print_address}, {"u", print_u}, {"o", print_o},
-			{"X", print_bigx}, {NULL, NULL}};
+			{"X", print_bigx}, {"%%", printf_37}, {NULL, NULL}};
 
 	va_list args;
 
