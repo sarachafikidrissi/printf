@@ -11,7 +11,7 @@ int _printf(const char *format, ...) {
   specifier mt[] = {{"c", print_char},    {"s", print_str},
                     {"d", print_number},  {"i", print_number},
                     {"%", print_percent}, {"r", print_rev},
-                    {NULL, NULL}};
+                    {"R", print_root},    {NULL, NULL}};
 
   va_list args;
 

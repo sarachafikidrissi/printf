@@ -20,6 +20,7 @@ int print_str(va_list args);
 int print_number(va_list args);
 int print_percent(va_list args);
 int print_rev(va_list args);
+int print_root(va_list args);
 
 /* helpers */
 int len_number(int num);
