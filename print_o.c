@@ -11,9 +11,6 @@ int print_o(va_list args)
 	unsigned int num = va_arg(args, unsigned int);
 	char *str = convert(num, 8, 0);
 	int count = 0;
-
-	if ( str[0] != '0')
-		count += _putchar('0');
 	count += _puts(str);
 	return (count);
 }
