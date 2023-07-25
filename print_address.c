@@ -7,10 +7,10 @@
  * if a flag is passed to _printf
  * Return: number of char printed
  */
-int print_address(va_list l, flags_t *f)
+int print_address(va_list args, flags_t *f)
 {
 	char *str;
-	unsigned long int p = va_arg(l, unsigned long int);
+	unsigned long int p = va_arg(args, unsigned long int);
 
 	register int count = 0;
 
