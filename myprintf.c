@@ -6,13 +6,15 @@
  * Return: number of printed characters.
  */
 int _printf(const char *format, ...) {
-  int count = 0;
-  va_list args;
-
-  va_start(args, format);
+  int count = 0, j;
+  int found = 0;
   specifier mt[] = {{"c", print_char},    {"s", print_str},
                     {"d", print_number},  {"i", print_number},
                     {"%", print_percent}, {NULL, NULL}};
+
+  va_list args;
+
+  va_start(args, format);
 
   if (!format || (format[0] == '%' && !format[1]))
     return (-1);
@@ -22,9 +24,6 @@ int _printf(const char *format, ...) {
   while (*format) {
     if (*format == '%') {
       format++;
-
-      int j;
-      int found = 0;
 
       for (j = 0; mt[j].s; j++) {
         if (*format == *mt[j].s) {
